@@ -1,6 +1,8 @@
 package com.company.jmixpm;
 
 import com.google.common.base.Strings;
+import io.jmix.core.CoreProperties;
+import io.jmix.localfs.LocalFileStorage;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -37,6 +39,11 @@ public class JmixpmApplication {
     @ConfigurationProperties("main.datasource.hikari")
     DataSource dataSource(DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    public LocalFileStorage secondFileStorage(CoreProperties coreProperties) {
+        return new LocalFileStorage("fs2", coreProperties.getWorkDir() + "/fs2");
     }
 
     @EventListener

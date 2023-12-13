@@ -1,5 +1,6 @@
 package com.company.jmixpm.entity;
 
+import io.jmix.core.FileRef;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -19,6 +20,9 @@ public class Task {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @Column(name = "ATTACHMENT", length = 1024)
+    private FileRef attachment;
 
     @InstanceName
     @Column(name = "NAME", nullable = false)
@@ -43,6 +47,14 @@ public class Task {
     @Composition
     @OneToMany(mappedBy = "task")
     private List<SubTask> subTasks;
+
+    public FileRef getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(FileRef attachment) {
+        this.attachment = attachment;
+    }
 
     public List<SubTask> getSubTasks() {
         return subTasks;
